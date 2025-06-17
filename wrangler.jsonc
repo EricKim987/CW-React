@@ -1,5 +1,5 @@
 {
-  "name": "cw-worker",
+  "name": "cw-react",
   "compatibility_date": "2025-06-16",
   "assets": {
     "directory": "./dist"
