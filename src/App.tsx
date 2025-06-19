@@ -1,20 +1,17 @@
+import { motion } from "motion/react";
+
 function App() {
   return (
-    <>
-      <header className="h-16 grid justify-items-center">
-        <div className="w-full max-w-[980px] grid grid-cols-[auto_1fr_auto]">
-          <div className="p-4">CW</div>
-          <div aria-hidden="true"></div>
-          <div className="p-4 grid grid-cols-[auto_auto] gap-4">
-            <div>Something</div>
-            <div>About</div>
-          </div>
-        </div>
-      </header>
-      <main className="grid place-items-center min-h-screen">
-        <h1>Coming Soon...</h1>
-      </main>
-    </>
+    <div className="h-screen bg-black">
+      <div className="max-w-[1000px] h-screen border mx-auto relative">
+        <motion.img
+          src="the-fool-380_640.webp"
+          alt="the fool card"
+          srcSet="the-fool-380_640.webp, the-fool-1141_1920.webp 2x"
+          className="bg-white absolute left-[50px] top-[50%] translate-y-[-50%] h-[320px] w-[180px] md:h-[480px] md:w-[270px]"
+        />
+      </div>
+    </div>
   );
 }
 
