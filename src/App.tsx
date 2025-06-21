@@ -1,21 +1,27 @@
-import { motion } from "motion/react";
+import { Card } from "./Card";
+
+const cards = [
+  "the-fool",
+  "temperance",
+  "hierophant",
+  "hermit",
+  "empress",
+  "chariot",
+].map((name, index) => ({
+  image: name,
+  rotateX: "25deg",
+  rotateZ: `${-10 + Math.random() * 20}deg`,
+  end: { y: index * -5 },
+  delay: 0.1 * index,
+}));
 
 function App() {
   return (
     <div className="h-screen bg-black">
       <div className="max-w-[1000px] h-screen border mx-auto relative">
-        <motion.div
-          className="bg-white absolute left-[100px] top-[50%] translate-y-[-50%] py-2 px-1 rounded"
-          initial={{ y: "-100%" }}
-          animate={{ y: "0%", rotateX: "45deg", rotateZ: "10deg" }}
-        >
-          <img
-            src="the-fool-380_640.webp"
-            alt="the fool card"
-            srcSet="the-fool-380_640.webp, the-fool-1141_1920.webp 2x"
-            className="h-[160px] w-[85px] md:h-[320px] md:w-[190px]"
-          />
-        </motion.div>
+        {cards.map((card) => (
+          <Card key={card.image} {...card} />
+        ))}
       </div>
     </div>
   );
