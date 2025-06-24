@@ -1,34 +1,41 @@
-import { motion, type TargetAndTransition } from "motion/react";
+import {
+  motion,
+  type MotionStyle,
+  type TargetAndTransition,
+} from "motion/react";
 
 type CardProps = {
-  end: TargetAndTransition;
-  delay: number;
+  start?: TargetAndTransition;
+  end?: TargetAndTransition;
+  delay?: number;
   image: string;
   index: number;
-  currentCardIndex: number | null;
-  onHover: (index: number | null) => void;
+  currentCardIndex?: number;
+  style?: MotionStyle;
+  onHover?: (index: number | undefined) => void;
+  onClick?: (cardName: string) => void;
 };
 
-const yStart = -1000;
-
 export const Card = ({
+  start,
   end,
   delay,
   image,
   index,
+  style,
   currentCardIndex,
   onHover,
+  onClick,
 }: CardProps) => {
+  const isOnTopOfHoveredCard =
+    currentCardIndex !== undefined && currentCardIndex < index;
   return (
     <motion.div
-      className="bg-white absolute left-[100px] top-[50%] translate-y-[-50%] py-2 px-1 rounded cursor-pointer"
-      initial={{ y: yStart }}
+      className="bg-white absolute translate-y-[-50%] py-2 px-1 rounded cursor-pointer"
+      initial={start}
       animate={{
         ...end,
-        y:
-          currentCardIndex !== null && currentCardIndex < index
-            ? yStart
-            : end.y,
+        y: isOnTopOfHoveredCard ? start?.y : 0,
       }}
       transition={{ duration: 0.4, delay }}
       whileHover={{
@@ -36,8 +43,11 @@ export const Card = ({
         rotateZ: "0deg",
         transition: { duration: 0.2 },
       }}
-      onMouseEnter={() => onHover(index)}
-      onMouseLeave={() => onHover(null)}
+      style={{ ...style, marginTop: `${index * -20}px` }}
+      onMouseEnter={() => onHover?.(index)}
+      onMouseLeave={() => onHover?.(undefined)}
+      onClick={() => onClick?.(image)}
+      layoutId={image}
     >
       <img
         src={`${image}-380_640.webp`}
