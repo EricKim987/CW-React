@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card } from "./Card";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
+import { Text } from "./Text";
 
 const cards = [
   "the-fool",
@@ -20,6 +21,7 @@ function App() {
     undefined
   );
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
+
   return (
     <>
       <title>Tarot Card Animation Demo | Framer Motion React</title>
@@ -82,15 +84,8 @@ function App() {
                   >
                     &#x2716;
                   </div>
-                  <div className="absolute left-[320px] top-[35%] right-[40px] text-white text-xl md:left-[500px] md:text-2xl">
-                    <p>
-                      The Fool is the first card of the Major Arcana (numbered
-                      0) and represents new beginnings, innocence, and
-                      spontaneity. The image shows a young person stepping off a
-                      cliff, reminding us to trust our instincts and take bold
-                      leaps of faith.
-                    </p>
-                  </div>
+
+                  <Text />
                 </motion.div>
               )}
             </AnimatePresence>
